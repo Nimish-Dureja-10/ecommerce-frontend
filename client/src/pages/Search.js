@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout/Layout'
 import { useSearch } from '../context/search'
+import { server } from '../App';
 
 const Search = () => {
     const [values,setValues] = useSearch();
@@ -17,7 +18,7 @@ const Search = () => {
                 <div className='d-flex flex-wrap mt-4'>
                 {values.result.map(product=>(
                     <div key={product._id} className="card m-2" style={{width: '18rem'}} >
-                        <img src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
+                        <img src={`${server}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
                         <div className="card-body">
                             <h5 className="card-title">{product.name}</h5>
                             <p className="card-text">{product.description.substring(0.30)}</p>

@@ -25,6 +25,8 @@ import Dashboard from "./pages/user/Dashboard";
 import Orders from "./pages/user/Orders";
 import Profile from "./pages/user/Profile";
 
+export const server = 'https://ecommerce-backend-pi-six.vercel.app';
+
 function App() {
   return (
     <>

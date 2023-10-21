@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import AdminMenu from '../../components/Layout/AdminMenu'
 import Layout from '../../components/Layout/Layout'
 import { useAuth } from '../../context/auth';
+import { server } from '../../App';
 
 const Users = () => {
 
@@ -12,7 +13,7 @@ const Users = () => {
     //fetch all user function
     const getAllUsers = async () => {
         try {
-            const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/all-users`)
+            const {data} = await axios.get(`${server}/api/v1/auth/all-users`)
             setUsers(data);
         } catch (error) {
             console.log(error);

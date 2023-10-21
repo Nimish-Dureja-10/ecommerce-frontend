@@ -5,6 +5,7 @@ import axios from "axios";
 import {useNavigate,useLocation} from "react-router-dom"
 import "../../styles/AuthStyles.css"
 import { useAuth } from '../../context/auth';
+import { server } from '../../App';
 
 const Login = () => {
 
@@ -19,7 +20,7 @@ const Login = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/login`,{
+            const res = await axios.post(`${server}/api/v1/auth/login`,{
                email,password
             });
             if(res && res.data.success){

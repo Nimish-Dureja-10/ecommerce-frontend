@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../components/Layout/Layout'
+import { server } from '../App';
 
 const CategoryProduct = () => {
 
@@ -16,7 +17,7 @@ const CategoryProduct = () => {
 
   const getProductByCategory = async () => {
     try {
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/product-category/${params.slug}`);
+      const {data} = await axios.get(`${server}/api/v1/products/product-category/${params.slug}`);
       setProducts(data?.products);
       setCategory(data?.category);
     } catch (error) {
@@ -34,7 +35,7 @@ const CategoryProduct = () => {
             <div className='d-flex flex-wrap'>
                 {products.map(product=>(
                     <div key={product._id} className="card m-2" style={{width: '18rem'}} >
-                        <img src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
+                        <img src={`${server}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
                         <div className="card-body">
                             <h5 className="card-title">{product.name}</h5>
                             <p className="card-text">{product.description.substring(0.30)}</p>

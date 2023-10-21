@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import AdminMenu from '../../components/Layout/AdminMenu'
 import Layout from '../../components/Layout/Layout'
 import { useNavigate,useParams } from 'react-router-dom';
+import { server } from '../../App';
 import {Select} from 'antd';
 const {Option} = Select;
 
@@ -24,7 +25,7 @@ const UpdateProduct = () => {
     //get single product
     const getSingleProduct = async () => {
         try {
-            const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/get-product/${params.slug}`);
+            const {data} = await axios.get(`${server}/api/v1/products/get-product/${params.slug}`);
             setName(data.product.name);
             setId(data.product._id);
             setDescription(data.product.description);
@@ -45,7 +46,7 @@ const UpdateProduct = () => {
     //get all categories
     const getAllCategory = async () =>{
         try {
-            const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`);
+            const {data} = await axios.get(`${server}/api/v1/category/get-category`);
             if(data?.success){
                 setCategories(data?.category);
             }
@@ -72,7 +73,7 @@ const UpdateProduct = () => {
             photo && productData.append("photo",photo);
 
             
-            const {data} = await axios.put(`${process.env.REACT_APP_API}/api/v1/products/update-product/${id}`,productData);
+            const {data} = await axios.put(`${server}/api/v1/products/update-product/${id}`,productData);
             if(data?.success){
                 toast.success("Product Updated Successfully");
                 navigate("/dashboard/admin/products");
@@ -90,7 +91,7 @@ const UpdateProduct = () => {
         try {
             let answer = window.prompt("Are Your Sure You Want To Delete This Product");
             if(!answer) return;
-            const {data} = await axios.delete(`${process.env.REACT_APP_API}/api/v1/products/delete-product/${id}`);
+            const {data} = await axios.delete(`${server}/api/v1/products/delete-product/${id}`);
             toast.success("Product Delete Successfully");
             navigate("/dashboard/admin/products");
         } catch (error) {
@@ -131,7 +132,7 @@ const UpdateProduct = () => {
                                 </div>
                             ):(
                                 <div className='text-center'>
-                                    <img src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${id}`} height={"200px"} className="img img-responsive" alt={name}  />
+                                    <img src={`${server}/api/v1/products/product-photo/${id}`} height={"200px"} className="img img-responsive" alt={name}  />
                                 </div> 
                             )}
                         </div>

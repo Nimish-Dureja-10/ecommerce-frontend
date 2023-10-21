@@ -4,6 +4,7 @@ import Layout from '../../components/Layout/Layout'
 import UserMenu from '../../components/Layout/UserMenu'
 import { useAuth } from '../../context/auth'
 import moment from "moment"
+import { server } from '../../App'
 
 const Orders = () => {
 
@@ -13,7 +14,7 @@ const Orders = () => {
     //get orders
     const getOrders = async () => {
         try {
-            const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/orders`);
+            const {data} = await axios.get(`${server}/api/v1/auth/orders`);
             setOrders(data);
         } catch (error) {
             console.log(error);
@@ -63,7 +64,7 @@ const Orders = () => {
                             <div className="row mb-2 p-3 card flex-row" key={p._id}>
                             <div className="col-md-4">
                             <img
-                              src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${p._id}`}
+                              src={`${server}/api/v1/products/product-photo/${p._id}`}
                               className="card-img-top object-fit-contain"
                               alt={p.name}
                               width="100px"

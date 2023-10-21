@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import AdminMenu from '../../components/Layout/AdminMenu'
 import Layout from '../../components/Layout/Layout'
 import { useNavigate } from 'react-router-dom';
+import { server } from '../../App';
 import {Select} from 'antd';
 const {Option} = Select;
 
@@ -22,7 +23,7 @@ const CreateProduct = () => {
     //get all categories
     const getAllCategory = async () =>{
         try {
-            const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`);
+            const {data} = await axios.get(`${server}/api/v1/category/get-category`);
             if(data?.success){
                 setCategories(data?.category);
             }
@@ -49,7 +50,7 @@ const CreateProduct = () => {
             // productData.append("shipping",shipping);
             productData.append("photo",photo);
 
-            const {data} = await axios.post(`${process.env.REACT_APP_API}/api/v1/products/create-product`,productData);
+            const {data} = await axios.post(`${server}/api/v1/products/create-product`,productData);
             if(data?.success){
                 toast.success("Product Created Successfully");
                 navigate("/dashboard/admin/products");

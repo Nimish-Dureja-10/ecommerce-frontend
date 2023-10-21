@@ -7,6 +7,7 @@ import { prices } from '../components/Prices';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/cart';
 import Start from '../components/Layout/Start';
+import { server } from '../App';
 
 const HomePage = () => {
   const [cart,setCart] = useCart();
@@ -23,7 +24,7 @@ const HomePage = () => {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/product-list/${page}`);
+      const {data} = await axios.get(`${server}/api/v1/products/product-list/${page}`);
       setLoading(false);
       setProducts(data.products);
     } catch (error) {
@@ -40,7 +41,7 @@ const HomePage = () => {
   //get categories
   const getAllCategory = async () =>{
     try {
-        const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`);
+        const {data} = await axios.get(`${server}/api/v1/category/get-category`);
         if(data?.success){
             setCategories(data?.category);
         }
@@ -69,7 +70,7 @@ const HomePage = () => {
   //get total count
   const getTotal = async () => {
     try {
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/product-count`);
+      const {data} = await axios.get(`${server}/api/v1/products/product-count`);
       if(data?.success){
         setTotal(data?.total);
       }
@@ -87,7 +88,7 @@ const HomePage = () => {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/product-list/${page}`);
+      const {data} = await axios.get(`${server}/api/v1/products/product-list/${page}`);
       setLoading(false);
       setProducts([...products,...data.products]);
     } catch (error) {
@@ -99,7 +100,7 @@ const HomePage = () => {
   //get filtered products
   const filterProducts = async () => {
     try {
-      const {data} = await axios.post(`${process.env.REACT_APP_API}/api/v1/products/product-filters`,{checked,radio});
+      const {data} = await axios.post(`${server}/api/v1/products/product-filters`,{checked,radio});
       setProducts(data?.products);
     } catch (error) {
         console.log(error);
@@ -147,7 +148,7 @@ const HomePage = () => {
             <div className='d-flex flex-wrap'>
               {products.map(product=>(
                   <div key={product._id} className="card m-2" style={{width: '18rem'}} >
-                      <img src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
+                      <img src={`${server}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
                       <div className="card-body">
                           <h5 className="card-title">{product.name}</h5>
                           <p className="card-text">{product.description.substring(0.30)}</p>

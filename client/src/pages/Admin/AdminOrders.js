@@ -4,6 +4,7 @@ import AdminMenu from '../../components/Layout/AdminMenu'
 import Layout from '../../components/Layout/Layout'
 import { useAuth } from '../../context/auth';
 import moment from "moment"
+import { server } from '../../App';
 import {Select} from "antd"
 const {Option} = Select
 
@@ -18,7 +19,7 @@ const AdminOrders = () => {
     //get all orders details
     const getOrders = async () => {
         try {
-            const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/all-orders`);
+            const {data} = await axios.get(`${server}/api/v1/auth/all-orders`);
             setOrders(data);
         } catch (error) {
             console.log(error);
@@ -32,7 +33,7 @@ const AdminOrders = () => {
     //handle order status by admin
     const handleChange = async (orderId,value) => {
         try {
-            const {data} = await axios.put(`${process.env.REACT_APP_API}/api/v1/auth/order-status/${orderId}`,{status:value})
+            const {data} = await axios.put(`${server}/api/v1/auth/order-status/${orderId}`,{status:value})
             getOrders();
         } catch (error) {
             console.log(error);
@@ -83,7 +84,7 @@ const AdminOrders = () => {
                             <div className="row mb-2 p-3 card flex-row" key={p._id}>
                             <div className="col-md-4">
                             <img
-                              src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${p._id}`}
+                              src={`${server}/api/v1/products/product-photo/${p._id}`}
                               className="card-img-top object-fit-contain"
                               alt={p.name}
                               width="100px"

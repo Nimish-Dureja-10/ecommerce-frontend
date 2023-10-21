@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import Layout from '../components/Layout/Layout'
 import { useCart } from '../context/cart'
+import { server } from '../App'
 
 const ProductDetails = () => {
 
@@ -21,7 +22,7 @@ const ProductDetails = () => {
   //get product detail
   const getProduct = async () => {
     try {
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/get-product/${params.slug}`);
+      const {data} = await axios.get(`${server}/api/v1/products/get-product/${params.slug}`);
       setProduct(data?.product);
       getSimilarProducts(data?.product._id,data?.product.category._id);
     } catch (error) {
@@ -32,7 +33,7 @@ const ProductDetails = () => {
   //get similar products functions
   const getSimilarProducts = async (pid,cid) => {
     try {
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/related-product/${pid}/${cid}`);
+      const {data} = await axios.get(`${server}/api/v1/products/related-product/${pid}/${cid}`);
       setRelatedProducts(data?.products);
     } catch (error) {
       console.log(error);
@@ -43,7 +44,7 @@ const ProductDetails = () => {
     <Layout title={"Product Details"}>
       <div className='row container m-4'>
         <div className='col-md-6 border p-3'>
-        <img height={"350px"} width={"350px"} src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
+        <img height={"350px"} width={"350px"} src={`${server}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
         </div>
         <div className='col-md-6'>
           <h1 className='text-center'>Products Details</h1>
@@ -60,7 +61,7 @@ const ProductDetails = () => {
           <div className='d-flex flex-wrap'>
               {relatedProducts.map(product=>(
                   <div key={product._id} className="card m-2" style={{width: '18rem'}} >
-                      <img src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
+                      <img src={`${server}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
                       <div className="card-body">
                           <h5 className="card-title">{product.name}</h5>
                           <p className="card-text">{product.description.substring(0.30)}</p>

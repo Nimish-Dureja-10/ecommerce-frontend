@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import AdminMenu from '../../components/Layout/AdminMenu.js'
 import Layout from "../../components/Layout/Layout.js"
-
+import { server } from '../../App.js';
 
 const Products = () => {
     
@@ -13,7 +13,7 @@ const Products = () => {
     //get all products
     const getAllProducts = async () => {
         try {
-            const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/products/get-product`);
+            const {data} = await axios.get(`${server}/api/v1/products/get-product`);
             if(data?.success){
                 toast.success("All Products List");
                 setProducts(data.products);
@@ -42,7 +42,7 @@ const Products = () => {
                         {products.map(product=>(
                             <Link to={`/dashboard/admin/product/${product.slug}`} key={product._id} className="product-link">
                                 <div className="card m-2" style={{width: '18rem'}} >
-                                    <img src={`${process.env.REACT_APP_API}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
+                                    <img src={`${server}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
                                     <div className="card-body">
                                         <h5 className="card-title">{product.name}</h5>
                                         <p className="card-text">{product.description}</p>
