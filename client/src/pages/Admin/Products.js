@@ -38,7 +38,7 @@ const Products = () => {
                 </div>
                 <div className='col-md-9'>
                     <h1 className='text-center'>Product List</h1>
-                    <div className='d-flex'>
+                    <div className='d-flex flex-wrap'>
                         {products.map(product=>(
                             <Link to={`/dashboard/admin/product/${product.slug}`} key={product._id} className="product-link">
                                 <div className="card m-2" style={{width: '18rem'}} >
