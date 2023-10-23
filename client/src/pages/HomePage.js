@@ -114,7 +114,7 @@ const HomePage = () => {
 
   return (
     <Layout title={"Best offers are here!!!"}>
-    <div className='container-fluid w-75'>
+    <div className='container-fluid w-100'>
       <Start/>
     </div>
     <hr/>
@@ -143,9 +143,9 @@ const HomePage = () => {
               <button className='btn btn-outline-secondary' onClick={()=>window.location.reload()}>Reset Filters</button>
             </div>
           </div>
-          <div className='col-md-9'>
+          <div className='col-md-10'>
             <h1 className='text-center'>All Products</h1>
-            <div className='d-flex flex-wrap'>
+            <div className='d-flex flex-wrap justify-content-center'>
               {products.map(product=>(
                   <div key={product._id} className="card m-2" style={{width: '18rem'}} >
                       <img src={`${server}/api/v1/products/product-photo/${product._id}`} className="card-img-top" alt={product.name} />
